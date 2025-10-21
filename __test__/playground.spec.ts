@@ -82,3 +82,8 @@ test("유저의 객체를 찾는다", () => {
 test("없는 번호를 입력하면 유저의 객체를 찾지 못한다.", () => {
   expect(findUser(21324)).toBeNull();
 });
+
+test("숫자 0은 falsy지만, 문자열 0은 truthy하다.", () => {
+  expect(0).toBeFalsy();
+  expect("0").toBeTruthy();
+});
