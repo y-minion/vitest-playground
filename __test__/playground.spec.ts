@@ -38,4 +38,47 @@ test("객체의 일부만 이용해서 비교하는 경우", () => {
     no: 12,
     firstName: "John",
   });
+
+  //객체가 특정 속성을 갖고있는지, 혹은 특정 속성-값 쌍을 갖고있는지 확인 할 수 있다.
+  expect(obj).toHaveProperty("no");
+  expect(obj).toHaveProperty("firstName", "John");
+});
+
+test("배열을 테스트 하는경우", () => {
+  const color = ["Red", "Yellow", "Blue"];
+  const colorObjArr = [
+    { color: "Red" },
+    { color: "Yellow" },
+    { color: "Blue" },
+  ];
+
+  //길이를 확인 할 경우
+  expect(color).toHaveLength(3);
+
+  // 특정 원시 값을 확인 할 경우
+  expect(color).toContain("Red");
+  expect(color).not.toContain("Green");
+
+  //배열 내부의 값들이 원시값이 아니라 객체인 경우에는 Equal을 사용하면 된다.
+  expect(colorObjArr).toContainEqual({ color: "Blue" });
+});
+
+const users = [
+  { no: 1, email: "user1@gmail.com" },
+  { no: 2, email: "user2@gmail.com" },
+  { no: 3, email: "user3@gmail.com" },
+];
+
+function findUser(no: number) {
+  return users.find((user) => user.no === no) ?? null;
+}
+
+test("유저의 객체를 찾는다", () => {
+  expect(findUser(1)).toBeDefined();
+  expect(findUser(1)).not.toBeUndefined();
+  expect(findUser(1)).not.toBeNull();
+});
+
+test("없는 번호를 입력하면 유저의 객체를 찾지 못한다.", () => {
+  expect(findUser(21324)).toBeNull();
 });
