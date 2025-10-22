@@ -87,3 +87,19 @@ test("숫자 0은 falsy지만, 문자열 0은 truthy하다.", () => {
   expect(0).toBeFalsy();
   expect("0").toBeTruthy();
 });
+
+test("반환값의 타입을 확인할 수 있다.", () => {
+  expect(1).toBeTypeOf("number");
+});
+
+test("어떤 객체인지 알 수 있다", () => {
+  const date = new Date();
+  expect(date).toBeInstanceOf(Date);
+  expect(date).toBeInstanceOf(Object);
+});
+
+test("에러 발생을 유발하는 키를 입력하면 에러가 발생한다.", () => {
+  expect(() => getUser(-1)).toThrowError();
+  expect(() => getUser(-1)).toThrowError("유효한 유저 숫자를 입력하세요.");
+  expect(() => getUser(-1)).toThrowError(/유효한/i);
+});
